@@ -1,0 +1,14 @@
+{
+  "name": "Unbound Next.js Dev",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "nextjs",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"],
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/sh"
+      }
+    }
+  }
+}
