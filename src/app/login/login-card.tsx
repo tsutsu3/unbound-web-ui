@@ -26,7 +26,9 @@ import {
 } from "@/components/ui/form";
 
 const FormSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address." }),
+  username: z.string().min(1, {
+    message: "Please enter a valid username address.",
+  }),
   password: z.string().min(1, {
     message: "Please enter a password.",
   }),
@@ -38,7 +40,7 @@ export function LoginForm() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
@@ -64,7 +66,7 @@ export function LoginForm() {
           <CardHeader>
             <CardTitle className="text-2xl">Login</CardTitle>
             <CardDescription>
-              Enter your email below to login to your account
+              Enter your username below to login to your account
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -72,15 +74,12 @@ export function LoginForm() {
               <div className="grid gap-2">
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>Username</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="unbound.web.ui@example.com"
-                          {...field}
-                        />
+                        <Input placeholder="unbound" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
