@@ -1,0 +1,23 @@
+services:
+  unbound:
+    image: mvance/unbound:latest
+    container_name: unbound
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8953:8953"
+    volumes:
+      - ./unbound-config:/opt/unbound/etc/unbound
+    restart: unless-stopped
+
+  nextjs:
+    image: node:18-alpine
+    container_name: nextjs
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - unbound
